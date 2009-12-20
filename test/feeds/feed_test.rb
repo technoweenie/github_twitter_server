@@ -31,8 +31,8 @@ class FeedTest < FeedTestCase
     end
 
     it "parses feed/entry/content for PushEvent" do
-      commit = "@technoweenie @c_a18f5754 add faraday gemspec"
-      assert_equal "#{commit}\n#{commit}", @feed.entries[3].content
+      commit = "a18f5754 add faraday gemspec"
+      assert_equal "2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].content
     end
 
     it "parses event_types" do

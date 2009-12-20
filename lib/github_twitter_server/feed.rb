@@ -1,6 +1,5 @@
 require 'time'
 require 'sax-machine'
-require 'faraday'
 
 module GithubTwitterServer
   class Feed
@@ -94,9 +93,14 @@ module GithubTwitterServer
         msgs.shift
         s = []
         commits.each_with_index do |(user, sha), idx|
-          s << "@#{user} @c_#{sha} #{msgs[idx]}".strip
+          s << "#{"@#{user} " if user != author}#{sha} #{msgs[idx]}".strip
         end
-        s * "\n"
+        s = s * "\n"
+        case commits.size
+          when 1 then s
+          when 0 then ''
+          else "#{commits.size} commits: #{s}"
+        end
       end
     end
 
