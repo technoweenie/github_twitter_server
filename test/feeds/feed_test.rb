@@ -8,7 +8,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses #atom_data" do
-      assert_kind_of Atom, @feed.atom
+      assert_kind_of Feed::Atom, @feed.atom
     end
 
     it "parses atom entries" do

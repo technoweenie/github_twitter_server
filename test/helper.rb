@@ -6,8 +6,10 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'github_twitter_server'
 
+GithubTwitterServer::Feed
+
 class FeedTestCase < Test::Unit::TestCase
-  include GithubTwitterServer::Feeds
+  include GithubTwitterServer
 
   FIXTURE_PATH = File.join(File.dirname(__FILE__), 'fixtures')
 

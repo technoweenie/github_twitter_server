@@ -3,26 +3,24 @@ require 'sax-machine'
 require 'faraday'
 
 module GithubTwitterServer
-  module Feeds
-    class Feed
-      attr_reader :connection, :url
+  class Feed
+    attr_reader :connection, :url
 
-      def initialize(conn, url)
-        @connection = conn
-        @url = url
-      end
+    def initialize(conn, url)
+      @connection = conn
+      @url = url
+    end
 
-      def atom_response
-        @connection.get(@url)
-      end
+    def atom_response
+      @connection.get(@url)
+    end
 
-      def entries
-        atom.entries
-      end
+    def entries
+      atom.entries
+    end
 
-      def atom
-        @atom ||= Atom.parse(atom_response.body)
-      end
+    def atom
+      @atom ||= Atom.parse(atom_response.body)
     end
 
     class AtomEntry
