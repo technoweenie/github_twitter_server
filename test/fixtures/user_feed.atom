@@ -79,6 +79,16 @@
             &lt;/blockquote&gt;
           &lt;/div&gt;
         &lt;/li&gt;
+        &lt;li class=&quot;first&quot;&gt;
+            &lt;a href=&quot;http://github.com/technoweenie&quot; class=&quot;committer&quot;&gt;technoweenie&lt;/a&gt;
+          committed
+          &lt;a href=&quot;http://github.com/technoweenie/faraday/commit/a18f5754eb01425aadf9ad27a20fd40422e8f3e2&quot;&gt;a18f5754&lt;/a&gt;:
+          &lt;div class=&quot;message&quot;&gt;
+            &lt;blockquote title=&quot;add faraday gemspec&quot;&gt;
+              add faraday gemspec
+            &lt;/blockquote&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
 &lt;/div&gt;</content>
