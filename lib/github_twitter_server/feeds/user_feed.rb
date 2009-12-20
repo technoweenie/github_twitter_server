@@ -1,6 +1,6 @@
 module GithubTwitterServer
   module Feeds
-    class UserFeed
+    class UserFeed < ParsedFeed
       attr_reader :feed_connection
 
       def initialize(connection, user)

@@ -6,6 +6,25 @@
   <title>technoweenie's Activity</title>
   <updated>2009-12-19T15:00:51-08:00</updated>
   <entry>
+    <id>tag:github.com,2008:CommitCommentEvent/113924968</id>
+    <published>2009-12-19T16:40:48-08:00</published>
+    <updated>2009-12-19T16:40:48-00:00</updated>
+    <link type="text/html" href="http://github.com/technoweenie/faraday/commit/a18f5754eb01425aadf9ad27a20fd40422e8f3e2#-P0" rel="alternate"/>
+    <title>technoweenie commented on technoweenie/faraday</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+        Comment  in &lt;a href=&quot;http://github.com/technoweenie/faraday/commit/a18f5754eb01425aadf9ad27a20fd40422e8f3e2#comments&quot;&gt;a18f575&lt;/a&gt;:
+        &lt;blockquote title=&quot;this mess is gonna get raw, like sushi&quot;&gt;&lt;p&gt;this mess is gonna get raw, like sushi&lt;/p&gt;
+&lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>technoweenie</name>
+    </author>
+  </entry>
+  <entry>
     <id>tag:github.com,2008:CreateEvent/113908814</id>
     <published>2009-12-19T15:00:51-08:00</published>
     <updated>2009-12-19T15:00:51-08:00</updated>
