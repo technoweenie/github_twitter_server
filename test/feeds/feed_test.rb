@@ -1,10 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'helper'))
 
-class UserFeedTest < FeedTestCase
+class FeedTest < FeedTestCase
   describe "atom parsing" do
     before :all do
       @conn, @data = feed_connection 'technoweenie.atom', :user_feed
-      @feed = UserFeed.new @conn, "technoweenie"
+      @feed = Feed.new @conn, "technoweenie.atom"
     end
 
     it "parses #atom_data" do
@@ -64,7 +64,7 @@ class UserFeedTest < FeedTestCase
     it "fetches atom data from user url" do
       conn, data = feed_connection 'technoweenie.atom', :user_feed
 
-      feed = UserFeed.new conn, "technoweenie"
+      feed = Feed.new conn, "technoweenie.atom"
       assert_equal data, feed.atom_response.body
     end
   end

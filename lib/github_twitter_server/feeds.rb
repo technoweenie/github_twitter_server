@@ -4,19 +4,24 @@ require 'faraday'
 
 module GithubTwitterServer
   module Feeds
-    autoload :UserFeed, "github_twitter_server/feeds/user_feed"
+    class Feed
+      attr_reader :connection, :url
 
-    class ParsedFeed
+      def initialize(conn, url)
+        @connection = conn
+        @url = url
+      end
+
+      def atom_response
+        @connection.get(@url)
+      end
+
       def entries
         atom.entries
       end
 
       def atom
         @atom ||= Atom.parse(atom_response.body)
-      end
-
-      def atom_response
-        raise NotImplementedError
       end
     end
 
