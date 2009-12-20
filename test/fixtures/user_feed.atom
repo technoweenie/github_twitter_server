@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:github.com,2008:/technoweenie</id>
+  <link type="text/html" href="http://github.com" rel="alternate"/>
+  <link type="application/atom+xml" href="http://github.com/technoweenie.atom" rel="self"/>
+  <title>technoweenie's Activity</title>
+  <updated>2009-12-19T15:00:51-08:00</updated>
+  <entry>
+    <id>tag:github.com,2008:CreateEvent/113908814</id>
+    <published>2009-12-19T15:00:51-08:00</published>
+    <updated>2009-12-19T15:00:51-08:00</updated>
+    <link type="text/html" href="http://github.com/technoweenie/github_twitter_server/tree/master" rel="alternate"/>
+    <title>technoweenie created branch master at technoweenie/github_twitter_server</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+      New branch is at &lt;a href=&quot;http://github.com/technoweenie/github_twitter_server/tree/master&quot;&gt;technoweenie/github_twitter_server/tree/master&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>technoweenie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:CreateEvent/113907363</id>
+    <published>2009-12-19T14:59:46-08:00</published>
+    <updated>2009-12-19T14:59:46-08:00</updated>
+    <link type="text/html" href="http://github.com/technoweenie/github_twitter_server" rel="alternate"/>
+    <title>technoweenie created repository github_twitter_server</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+      New repository is at &lt;a href=&quot;http://github.com/technoweenie/github_twitter_server&quot;&gt;technoweenie/github_twitter_server&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>technoweenie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:PushEvent/113902146</id>
+    <published>2009-12-19T14:42:13-08:00</published>
+    <updated>2009-12-19T14:42:13-08:00</updated>
+    <link type="text/html" href="http://github.com/technoweenie/faraday/commits/master" rel="alternate"/>
+    <title>technoweenie pushed to master at technoweenie/faraday</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  HEAD is &lt;a href=&quot;http://github.com/technoweenie/faraday/tree/a18f5754eb01425aadf9ad27a20fd40422e8f3e2&quot;&gt;a18f5754eb01425aadf9ad27a20fd40422e8f3e2&lt;/a&gt;
+  &lt;div class=&quot;commits&quot; &gt;
+    &lt;ul&gt;
+        &lt;li class=&quot;first&quot;&gt;
+            &lt;a href=&quot;http://github.com/technoweenie&quot; class=&quot;committer&quot;&gt;technoweenie&lt;/a&gt;
+          committed
+          &lt;a href=&quot;http://github.com/technoweenie/faraday/commit/a18f5754eb01425aadf9ad27a20fd40422e8f3e2&quot;&gt;a18f5754&lt;/a&gt;:
+          &lt;div class=&quot;message&quot;&gt;
+            &lt;blockquote title=&quot;add faraday gemspec&quot;&gt;
+              add faraday gemspec
+            &lt;/blockquote&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</content>
+    <author>
+      <name>technoweenie</name>
+    </author>
+  </entry>
+</feed>
