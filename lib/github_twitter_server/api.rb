@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'twitter_server'
 require 'base64'
-require File.join(File.dirname(__FILE__), '../github_twitter_server')
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
+require 'github_twitter_server'
 
 get '/' do
   'hello world'
