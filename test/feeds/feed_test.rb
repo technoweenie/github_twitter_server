@@ -3,7 +3,10 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'helper'))
 class FeedTest < FeedTestCase
   describe "atom parsing" do
     before :all do
-      @conn, @data = feed_connection 'technoweenie.atom', :user_feed
+      @data = feed_data(:user_feed)
+      @conn = Faraday::TestConnection.new do |stub|
+        stub.get('technoweenie.atom') { [200, {}, @data] }
+      end
       @feed = Feed.new @conn, "technoweenie.atom"
     end
 
@@ -62,7 +65,10 @@ class FeedTest < FeedTestCase
 
   describe "#atom_response" do
     it "fetches atom data from user url" do
-      conn, data = feed_connection 'technoweenie.atom', :user_feed
+      data = feed_data(:user_feed)
+      conn = Faraday::TestConnection.new do |stub|
+        stub.get('technoweenie.atom') { [200, {}, data] }
+      end
 
       feed = Feed.new conn, "technoweenie.atom"
       assert_equal data, feed.atom_response.body
