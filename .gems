@@ -1,4 +1,4 @@
 nokogiri
-faraday
 sax-machine
-twitter_server
+faraday --version 0.0.2
+twitter_server --version 0.2.1
