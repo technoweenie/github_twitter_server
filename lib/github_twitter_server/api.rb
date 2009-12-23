@@ -25,7 +25,7 @@ end
 twitter_statuses_home_timeline do |params|
   feed = github_user_feed(params[:auth][:user])
   feed.atom.entries.map do |e|
-    GithubTwitterServer::STATUS.merge(:id => e.status_id, :text => e.content, :user => {:screen_name => e.author})
+    e.twitter_status
   end
 end
 

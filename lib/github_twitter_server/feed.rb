@@ -23,12 +23,22 @@ module GithubTwitterServer
     end
 
     class AtomEntry
+      STATUS = {:source => 'github', :source_href => 'http://github.com'}.freeze
+
       include SAXMachine
       element :id, :as => :guid
       element :updated
       element :author,  :as => :author_name
       element :content, :as => :raw_content
       element :link, :value => :href, :with => {:type => "text/html", :rel => 'alternate'}
+
+      def twitter_status
+        STATUS.merge(:id => status_id, :text => content, :user => twitter_user)
+      end
+
+      def twitter_user
+        {:screen_name => author}
+      end
 
       def parsed_content
         @parsed_content ||= begin
