@@ -15,7 +15,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses atom entries" do
-      assert_equal 4, @feed.entries.size
+      assert_equal 5, @feed.entries.size
     end
 
     it "parses feed/entry/link" do
@@ -28,6 +28,10 @@ class FeedTest < FeedTestCase
 
     it "parses feed/entry/content for CreateEvent" do
       assert_equal 'New branch is at technoweenie/github_twitter_server/tree/master', @feed.entries[1].content
+    end
+
+    it "parses feed/entry/content for IssuesEvent" do
+      assert_equal 'Updated Fourma: sip', @feed.entries[4].content
     end
 
     it "parses feed/entry/content for PushEvent" do
@@ -51,11 +55,16 @@ class FeedTest < FeedTestCase
       assert_equal 'technoweenie/faraday', @feed.entries[3].project
     end
 
+    it "parses project name from feed/entry/title for IssuesEvent" do
+      assert_equal 'mxcl/homebrew', @feed.entries[4].project
+    end
+
     it "parses event_types" do
       assert_equal 'CommitCommentEvent', @feed.entries[0].event_type
       assert_equal 'CreateEvent',        @feed.entries[1].event_type
       assert_equal 'CreateEvent',        @feed.entries[2].event_type
       assert_equal 'PushEvent',          @feed.entries[3].event_type
+      assert_equal 'IssuesEvent',        @feed.entries[4].event_type
     end
 
     it "parses feed/entry/id as :guid" do

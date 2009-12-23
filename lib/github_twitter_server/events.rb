@@ -10,6 +10,18 @@ module GithubTwitterServer
       end
     end
 
+    module IssuesEvent
+      include GenericEvent
+
+      def project
+        if title =~ /\w+ opened issue \d+ on (.*)$/
+          $1
+        else
+          nil
+        end
+      end
+    end
+
     module CommitCommentEvent
       def project
         if title =~ /\w+ commented on (.*)$/

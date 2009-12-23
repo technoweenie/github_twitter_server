@@ -96,4 +96,23 @@
       <name>technoweenie</name>
     </author>
   </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/114814260</id>
+    <published>2009-12-21T19:40:40-08:00</published>
+    <updated>2009-12-21T19:40:40-08:00</updated>
+    <link type="text/html" href="http://github.com/mxcl/homebrew/issues/240/find" rel="alternate"/>
+    <title>traviscline opened issue 240 on mxcl/homebrew</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Updated Fourma: sip
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>traviscline</name>
+    </author>
+  </entry>
 </feed>
