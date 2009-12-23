@@ -14,11 +14,12 @@ module GithubTwitterServer
       include GenericEvent
 
       def project
-        if title =~ /\w+ opened issue \d+ on (.*)$/
-          $1
-        else
-          nil
-        end
+        @project ||= \
+          if title =~ /\w+ opened issue \d+ on (.*)$/
+            $1
+          else
+            nil
+          end
       end
     end
 
@@ -47,11 +48,12 @@ module GithubTwitterServer
 
     module PushEvent
       def project
-        if title =~ /\w+ pushed to \w+ at (.*)$/
-          $1
-        else
-          nil
-        end
+        @project ||= \
+          if title =~ /\w+ pushed to \w+ at (.*)$/
+            $1
+          else
+            nil
+          end
       end
 
       # put each commit on a line

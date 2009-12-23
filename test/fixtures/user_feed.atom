@@ -115,4 +115,22 @@
       <name>traviscline</name>
     </author>
   </entry>
+  <entry>
+    <id>tag:github.com,2008:WikiEvent/114807560</id>
+    <published>2009-12-21T19:08:48-08:00</published>
+    <updated>2009-12-21T19:08:48-08:00</updated>
+    <link type="text/html" href="http://github.com/mxcl/homebrew/wikis/git-guidelines" rel="alternate"/>
+    <title>mxcl edited a page in the mxcl/homebrew wiki</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &amp;quot;Git Guidelines&amp;quot; is at
+    &lt;a href=&quot;http://github.com/mxcl/homebrew/wikis/git-guidelines&quot;&gt;mxcl/homebrew/wikis/git-guidelines&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>mxcl</name>
+    </author>
+  </entry>
 </feed>

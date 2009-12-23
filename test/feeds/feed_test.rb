@@ -15,7 +15,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses atom entries" do
-      assert_equal 5, @feed.entries.size
+      assert_equal 6, @feed.entries.size
     end
 
     it "parses feed/entry/link" do
@@ -30,13 +30,17 @@ class FeedTest < FeedTestCase
       assert_equal 'New branch is at technoweenie/github_twitter_server/tree/master', @feed.entries[1].content
     end
 
+    it "parses feed/entry/content for PushEvent" do
+      commit = "a18f5754 add faraday gemspec"
+      assert_equal "2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].content
+    end
+
     it "parses feed/entry/content for IssuesEvent" do
       assert_equal 'Updated Fourma: sip', @feed.entries[4].content
     end
 
-    it "parses feed/entry/content for PushEvent" do
-      commit = "a18f5754 add faraday gemspec"
-      assert_equal "2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].content
+    it "parses feed/entry/content for WikiEvent" do
+      assert_equal '&quot;Git Guidelines&quot; is at mxcl/homebrew/wikis/git-guidelines', @feed.entries[5].content
     end
 
     it "combines status text for CommitCommentEvent" do
@@ -49,6 +53,10 @@ class FeedTest < FeedTestCase
 
     it "combines status_text for IssuesEvent" do
       assert_equal '@mxcl/homebrew Updated Fourma: sip', @feed.entries[4].status_text
+    end
+
+    it "combines status_text for WikiEvent" do
+      assert_equal '&quot;Git Guidelines&quot; is at mxcl/homebrew/wikis/git-guidelines', @feed.entries[5].status_text
     end
 
     it "combines status_text PushEvent" do
@@ -76,12 +84,17 @@ class FeedTest < FeedTestCase
       assert_equal 'mxcl/homebrew', @feed.entries[4].project
     end
 
+    it "parses project name from feed/entry/title for WikiEvent" do
+      assert_nil @feed.entries[5].project
+    end
+
     it "parses event_types" do
       assert_equal 'CommitCommentEvent', @feed.entries[0].event_type
       assert_equal 'CreateEvent',        @feed.entries[1].event_type
       assert_equal 'CreateEvent',        @feed.entries[2].event_type
       assert_equal 'PushEvent',          @feed.entries[3].event_type
       assert_equal 'IssuesEvent',        @feed.entries[4].event_type
+      assert_equal 'WikiEvent',          @feed.entries[5].event_type
     end
 
     it "parses feed/entry/id as :guid" do
