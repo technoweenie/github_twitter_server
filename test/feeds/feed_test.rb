@@ -15,7 +15,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses atom entries" do
-      assert_equal 6, @feed.entries.size
+      assert_equal 7, @feed.entries.size
     end
 
     it "parses feed/entry/link" do
@@ -43,6 +43,10 @@ class FeedTest < FeedTestCase
       assert_equal '&quot;Git Guidelines&quot; is at mxcl/homebrew/wikis/git-guidelines', @feed.entries[5].content
     end
 
+    it "parses feed/entry/content for DeleteEvent" do
+      assert_equal 'Deleted branch was at qrush/gemcutter/tree/add_gravatars', @feed.entries[6].content
+    end
+
     it "combines status text for CommitCommentEvent" do
       assert_equal '@technoweenie/faraday @c_a18f575 this mess is gonna get raw, like sushi', @feed.entries[0].status_text
     end
@@ -57,6 +61,10 @@ class FeedTest < FeedTestCase
 
     it "combines status_text for WikiEvent" do
       assert_equal '&quot;Git Guidelines&quot; is at mxcl/homebrew/wikis/git-guidelines', @feed.entries[5].status_text
+    end
+
+    it "combines status_text for DeleteEvent" do
+      assert_equal 'Deleted branch was at qrush/gemcutter/tree/add_gravatars', @feed.entries[6].status_text
     end
 
     it "combines status_text PushEvent" do
@@ -88,6 +96,10 @@ class FeedTest < FeedTestCase
       assert_nil @feed.entries[5].project
     end
 
+    it "parses project name from feed/entry/title for DeleteEvent" do
+      assert_nil @feed.entries[6].project
+    end
+
     it "parses event_types" do
       assert_equal 'CommitCommentEvent', @feed.entries[0].event_type
       assert_equal 'CreateEvent',        @feed.entries[1].event_type
@@ -95,6 +107,7 @@ class FeedTest < FeedTestCase
       assert_equal 'PushEvent',          @feed.entries[3].event_type
       assert_equal 'IssuesEvent',        @feed.entries[4].event_type
       assert_equal 'WikiEvent',          @feed.entries[5].event_type
+      assert_equal 'DeleteEvent',        @feed.entries[6].event_type
     end
 
     it "parses feed/entry/id as :guid" do
