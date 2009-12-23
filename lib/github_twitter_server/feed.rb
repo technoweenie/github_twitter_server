@@ -35,7 +35,7 @@ module GithubTwitterServer
       element :link, :value => :href, :with => {:type => "text/html", :rel => 'alternate'}
 
       def twitter_status
-        STATUS.merge(:id => status_id, :text => content, :user => twitter_user)
+        STATUS.merge(:id => status_id, :text => status_text, :user => twitter_user)
       end
 
       def twitter_user
@@ -50,6 +50,10 @@ module GithubTwitterServer
       def project
         extend_for_event_type
         project
+      end
+
+      def status_text
+        project ? "@#{project} #{content}" : content
       end
 
       def author

@@ -39,6 +39,23 @@ class FeedTest < FeedTestCase
       assert_equal "2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].content
     end
 
+    it "combines status text for CommitCommentEvent" do
+      assert_equal '@technoweenie/faraday @c_a18f575 this mess is gonna get raw, like sushi', @feed.entries[0].status_text
+    end
+
+    it "combines status_text for CreateEvent" do
+      assert_equal 'New branch is at technoweenie/github_twitter_server/tree/master', @feed.entries[1].status_text
+    end
+
+    it "combines status_text for IssuesEvent" do
+      assert_equal '@mxcl/homebrew Updated Fourma: sip', @feed.entries[4].status_text
+    end
+
+    it "combines status_text PushEvent" do
+      commit = "a18f5754 add faraday gemspec"
+      assert_equal "@technoweenie/faraday 2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].status_text
+    end
+
     it "parses feed/entry/title" do
       assert_equal 'technoweenie commented on technoweenie/faraday', @feed.entries[0].title
     end
