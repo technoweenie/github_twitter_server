@@ -1,7 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'helper'))
 
 class FeedTest < FeedTestCase
-  describe "atom parsing" do
+  describe "parsing User Feed" do
     before :all do
       @data = feed_data(:user_feed)
       @conn = Faraday::TestConnection.new do |stub|
@@ -33,6 +33,22 @@ class FeedTest < FeedTestCase
     it "parses feed/entry/content for PushEvent" do
       commit = "a18f5754 add faraday gemspec"
       assert_equal "2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].content
+    end
+
+    it "parses feed/entry/title" do
+      assert_equal 'technoweenie commented on technoweenie/faraday', @feed.entries[0].title
+    end
+
+    it "parses project name from feed/entry/title for CommitCommentEvent" do
+      assert_equal 'technoweenie/faraday', @feed.entries[0].project
+    end
+
+    it "parses project name from feed/entry/title for CreateEvent" do
+      assert_nil @feed.entries[1].project
+    end
+
+    it "parses project name from feed/entry/title for PushEvent" do
+      assert_equal 'technoweenie/faraday', @feed.entries[3].project
     end
 
     it "parses event_types" do

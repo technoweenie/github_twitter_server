@@ -1,5 +1,6 @@
 require 'time'
 require 'sax-machine'
+require 'github_twitter_server/events'
 
 module GithubTwitterServer
   class Feed
@@ -28,6 +29,7 @@ module GithubTwitterServer
       include SAXMachine
       element :id, :as => :guid
       element :updated
+      element :title
       element :author,  :as => :author_name
       element :content, :as => :raw_content
       element :link, :value => :href, :with => {:type => "text/html", :rel => 'alternate'}
@@ -40,24 +42,14 @@ module GithubTwitterServer
         {:screen_name => author}
       end
 
-      def parsed_content
-        @parsed_content ||= begin
-          raw_content.gsub! /<(.|\n)+?>/, ''
-          raw_content.gsub! /\s+/, ' '
-          raw_content.strip!
-          raw_content
-        end
+      def content
+        extend_for_event_type
+        content
       end
 
-      def content
-        @content ||= case event_type
-          when 'CommitCommentEvent'
-            parse_comment_event(parsed_content)
-          when 'PushEvent'
-            parse_push_event(parsed_content)
-          else
-            parsed_content
-        end
+      def project
+        extend_for_event_type
+        project
       end
 
       def author
@@ -79,38 +71,19 @@ module GithubTwitterServer
         @updated_at ||= Time.parse(updated)
       end
 
-      # Comment in a18f575: this mess is gonna get raw, like sushi =>
-      # @c_a18f575 this mess is gonna get raw, like sushi
-      def parse_comment_event(text)
-        # pull out commit hash and comment
-        if text =~ /(\w+)\: (.+)$/
-          "@c_#{$1} #{$2}"
-        else
-          text
+      def parsed_content
+        @parsed_content ||= begin
+          raw_content.gsub! /<(.|\n)+?>/, ''
+          raw_content.gsub! /\s+/, ' '
+          raw_content.strip!
+          raw_content
         end
       end
 
-      # put each commit on a line
-      # @link users
-      # @link commits
-      def parse_push_event(text)
-        text = text.dup
-        # parse out "HEAD IS (sha)"
-        text.gsub! /^HEAD is \w+ /, ''
-        # [['technoweenie', 'sha1'], ['technoweenie', 'sha2']]
-        commits = text.scan(/(\w+) committed (\w+):/)
-        msgs    = text.split(/\w+ committed \w+: /)
-        msgs.shift
-        s = []
-        commits.each_with_index do |(user, sha), idx|
-          s << "#{"@#{user} " if user != author}#{sha} #{msgs[idx]}".strip
-        end
-        s = s * "\n"
-        case commits.size
-          when 1 then s
-          when 0 then ''
-          else "#{commits.size} commits: #{s}"
-        end
+      def extend_for_event_type
+        extend Events.const_defined?(event_type) ?
+          Events.const_get(event_type)           :
+          Events::GenericEvent
       end
     end
 
