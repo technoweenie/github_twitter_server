@@ -3,11 +3,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'helper'))
 class FeedTest < FeedTestCase
   describe "parsing User Feed" do
     before :all do
-      @data = feed_data(:user_feed)
-      @conn = Faraday::TestConnection.new do |stub|
-        stub.get('technoweenie.atom') { [200, {}, @data] }
+      data = feed_data(:user_feed)
+      conn = Faraday::TestConnection.new do |stub|
+        stub.get('technoweenie.atom') { [200, {}, data] }
       end
-      @feed = Feed.new @conn, "technoweenie.atom"
+      @feed = Feed.new conn, "technoweenie.atom"
     end
 
     it "parses #atom_data" do
@@ -55,6 +55,11 @@ class FeedTest < FeedTestCase
       assert_equal 'New branch is at technoweenie/github_twitter_server/tree/master', @feed.entries[1].status_text
     end
 
+    it "combines status_text for PushEvent" do
+      commit = "a18f5754 add faraday gemspec"
+      assert_equal "@technoweenie/faraday 2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].status_text
+    end
+
     it "combines status_text for IssuesEvent" do
       assert_equal '@mxcl/homebrew Updated Fourma: sip', @feed.entries[4].status_text
     end
@@ -65,11 +70,6 @@ class FeedTest < FeedTestCase
 
     it "combines status_text for DeleteEvent" do
       assert_equal 'Deleted branch was at qrush/gemcutter/tree/add_gravatars', @feed.entries[6].status_text
-    end
-
-    it "combines status_text PushEvent" do
-      commit = "a18f5754 add faraday gemspec"
-      assert_equal "@technoweenie/faraday 2 commits: #{commit}\n@bob #{commit}", @feed.entries[3].status_text
     end
 
     it "parses feed/entry/title" do

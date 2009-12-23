@@ -23,10 +23,7 @@ end
 #end
 
 twitter_statuses_home_timeline do |params|
-  feed = github_user_feed(params[:auth][:user])
-  feed.atom.entries.map do |e|
-    e.twitter_status
-  end
+  cacher.fetch_user_feed(params[:auth][:user])
 end
 
 twitter_statuses_user_timeline do |params|
@@ -41,7 +38,6 @@ twitter_account_verify_credentials do |params|
   {:screen_name => params[:auth][:user]}
 end
 
-def github_user_feed(user)
-  conn = GithubTwitterServer::Connection.new("http://github.com")
-  GithubTwitterServer::Feed.new conn, "#{user}.atom"
+def cacher
+  GithubTwitterServer::Cacher.new
 end
