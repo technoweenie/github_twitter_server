@@ -26,7 +26,7 @@ twitter_statuses_home_timeline do |params|
   params[:auth] ||= {}
   return [] if params[:auth][:user].to_s.size.zero?
 
-  if params[:auth][:password] == 'x'
+  if params[:auth][:password].to_s.size < 32
     cacher.fetch_user_feed(params[:auth][:user])
   else
     [] # unimplemented news feed
