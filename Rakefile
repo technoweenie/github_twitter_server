@@ -6,6 +6,7 @@ namespace :ghtw do
     task :create do
       $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
       require 'github_twitter_server'
+      Friendly.configure ENV['DATABASE_URL']
       GithubTwitterServer::Cacher::Feed.create_tables!
     end
   end
