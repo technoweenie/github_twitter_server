@@ -1,6 +1,14 @@
 require 'rubygems'
 require 'rake'
 
+namespace :ghtw do
+  namespace :db do
+    task :create do
+      GithubTwitterServer::Cacher::Feed.create_tables!
+    end
+  end
+end
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
