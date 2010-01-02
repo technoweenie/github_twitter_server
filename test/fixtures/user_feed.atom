@@ -96,4 +96,58 @@
       <name>technoweenie</name>
     </author>
   </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/114814260</id>
+    <published>2009-12-21T19:40:40-08:00</published>
+    <updated>2009-12-21T19:40:40-08:00</updated>
+    <link type="text/html" href="http://github.com/mxcl/homebrew/issues/240/find" rel="alternate"/>
+    <title>traviscline opened issue 240 on mxcl/homebrew</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Updated Fourma: sip
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>traviscline</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:WikiEvent/114807560</id>
+    <published>2009-12-21T19:08:48-08:00</published>
+    <updated>2009-12-21T19:08:48-08:00</updated>
+    <link type="text/html" href="http://github.com/mxcl/homebrew/wikis/git-guidelines" rel="alternate"/>
+    <title>mxcl edited a page in the mxcl/homebrew wiki</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &amp;quot;Git Guidelines&amp;quot; is at
+    &lt;a href=&quot;http://github.com/mxcl/homebrew/wikis/git-guidelines&quot;&gt;mxcl/homebrew/wikis/git-guidelines&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>mxcl</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:DeleteEvent/114806136</id>
+    <published>2009-12-21T19:02:17-08:00</published>
+    <updated>2009-12-21T19:02:17-08:00</updated>
+    <link type="text/html" href="http://github.com/qrush" rel="alternate"/>
+    <title>qrush deleted branch add_gravatars at qrush/gemcutter</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    Deleted branch was at &lt;span style=&quot;color:#808080&quot;&gt;qrush/gemcutter/tree/add_gravatars&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>qrush</name>
+    </author>
+  </entry>
 </feed>

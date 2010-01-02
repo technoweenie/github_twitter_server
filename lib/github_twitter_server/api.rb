@@ -23,9 +23,13 @@ end
 #end
 
 twitter_statuses_home_timeline do |params|
-  feed = github_user_feed(params[:auth][:user])
-  feed.atom.entries.map do |e|
-    GithubTwitterServer::STATUS.merge(:id => e.status_id, :text => e.content, :user => {:screen_name => e.author})
+  params[:auth] ||= {}
+  return [] if params[:auth][:user].to_s.size.zero?
+
+  if params[:auth][:password].to_s.size < 32
+    cacher.fetch_user_feed(params[:auth][:user])
+  else
+    cacher.fetch_news_feed(params[:auth][:user], params[:auth][:password])
   end
 end
 
@@ -41,7 +45,6 @@ twitter_account_verify_credentials do |params|
   {:screen_name => params[:auth][:user]}
 end
 
-def github_user_feed(user)
-  conn = GithubTwitterServer::Connection.new("http://github.com")
-  GithubTwitterServer::Feed.new conn, "#{user}.atom"
+def cacher
+  GithubTwitterServer::Cacher.new
 end
