@@ -5,7 +5,7 @@ module Friendly
       def create_document_table(table)
         db.create_table(table.table_name) do
           primary_key :added_id
-          String      :id,         :size => 16
+          String      :id,         :size => 36
           String      :attributes, :text => true
           Time        :created_at
           Time        :updated_at
@@ -16,8 +16,8 @@ module Friendly
         attr = attr_klass # close around this please
 
         db.create_table(table.table_name) do
-          String :id, :size => 16
-          table.fields.flatten.each do |f|    
+          String :id, :size => 36
+          table.fields.flatten.each do |f|
             klass = table.klass.attributes[f].type
             type  = attr.custom_type?(klass) ? attr.sql_type(klass) : klass
             column(f, type)
