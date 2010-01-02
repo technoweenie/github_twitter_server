@@ -23,5 +23,10 @@ module GithubTwitterServer
       return [] if !user
       fetch_feed("#{user}.atom")
     end
+
+    def fetch_news_feed(user, token)
+      return [] if !user
+      fetch_feed("#{user}.private.atom?token=#{token}")
+    end
   end
 end
