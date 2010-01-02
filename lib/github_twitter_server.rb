@@ -1,4 +1,5 @@
 require 'faraday'
+require 'friendly'
 module GithubTwitterServer
   autoload :Feed,   "github_twitter_server/feed"
   autoload :Cacher, "github_twitter_server/cacher"

@@ -10,7 +10,14 @@ require 'github_twitter_server/api'
 require 'rack/test'
 require 'nokogiri'
 
+Friendly.configure :adapter  => "sqlite", :database => ":memory:"
+GithubTwitterServer::Cacher::Feed.create_tables!
+
 class FeedTestCase < Test::Unit::TestCase
+  before :all do
+    Friendly.db[:github_feeds].delete
+  end
+
   module XmlAssertions
     def assert_xml(actual = nil)
       xml = Nokogiri::XML::Builder.new
@@ -28,4 +35,10 @@ class FeedTestCase < Test::Unit::TestCase
   def feed_data(fixture)
     IO.read File.join(FIXTURE_PATH, "#{fixture}.atom")
   end
+end
+
+begin
+  require 'ruby-debug'
+  Debugger.start
+rescue LoadError
 end

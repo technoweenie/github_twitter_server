@@ -15,7 +15,7 @@ module GithubTwitterServer
     end
 
     def atom
-      @atom ||= Atom.parse(response.body)
+      @atom ||= Atom.parse(response)
     end
 
     class AtomEntry

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>tag:github.com,2008:CreateEvent/113908814</id>
+    <content type="html">foo</content>
+    <author>
+      <name>technoweenie</name>
+    </author>
+  </entry>
+</feed>

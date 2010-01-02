@@ -1,3 +1,4 @@
+require 'github_twitter_server/cacher/feed'
 module GithubTwitterServer
   class Cacher
     attr_accessor :connection
@@ -9,7 +10,11 @@ module GithubTwitterServer
     end
 
     def fetch_feed(path)
-      GithubTwitterServer::Feed.new(@connection.get(path)).entries.map do |entry|
+      atom_data = Feed.read(path) do
+        resp = @connection.get(path)
+        resp ? resp.body : nil
+      end
+      GithubTwitterServer::Feed.new(atom_data).entries.map do |entry|
         entry.twitter_status
       end
     end
