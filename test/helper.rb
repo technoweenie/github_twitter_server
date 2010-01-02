@@ -4,11 +4,23 @@ require 'context'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
+require 'sinatra/base'
 require 'github_twitter_server'
-
-GithubTwitterServer::Feed
+require 'github_twitter_server/api'
+require 'rack/test'
+require 'nokogiri'
 
 class FeedTestCase < Test::Unit::TestCase
+  module XmlAssertions
+    def assert_xml(actual = nil)
+      xml = Nokogiri::XML::Builder.new
+      yield xml
+      expected = xml.to_xml
+      actual ||= last_response.body
+      assert_equal expected, actual, "EXPECTED\n#{expected}\nACTUAL\n#{actual}"
+    end
+  end
+
   include GithubTwitterServer
 
   FIXTURE_PATH = File.join(File.dirname(__FILE__), 'fixtures')

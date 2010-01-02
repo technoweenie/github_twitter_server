@@ -23,7 +23,14 @@ end
 #end
 
 twitter_statuses_home_timeline do |params|
-  cacher.fetch_user_feed(params[:auth][:user])
+  params[:auth] ||= {}
+  return [] if params[:auth][:user].to_s.size.zero?
+
+  if params[:auth][:password] == 'x'
+    cacher.fetch_user_feed(params[:auth][:user])
+  else
+    [] # unimplemented news feed
+  end
 end
 
 twitter_statuses_user_timeline do |params|
