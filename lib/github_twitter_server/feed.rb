@@ -4,15 +4,10 @@ require 'github_twitter_server/events'
 
 module GithubTwitterServer
   class Feed
-    attr_reader :connection, :url
+    attr_reader :response
 
-    def initialize(conn, url)
-      @connection = conn
-      @url = url
-    end
-
-    def atom_response
-      @connection.get(@url)
+    def initialize(response)
+      @response = response
     end
 
     def entries
@@ -20,7 +15,7 @@ module GithubTwitterServer
     end
 
     def atom
-      @atom ||= Atom.parse(atom_response.body)
+      @atom ||= Atom.parse(response.body)
     end
 
     class AtomEntry

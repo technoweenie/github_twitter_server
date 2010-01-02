@@ -9,7 +9,7 @@ module GithubTwitterServer
     end
 
     def fetch_feed(path)
-      GithubTwitterServer::Feed.new(@connection, path).entries.map do |entry|
+      GithubTwitterServer::Feed.new(@connection.get(path)).entries.map do |entry|
         entry.twitter_status
       end
     end

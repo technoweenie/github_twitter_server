@@ -7,7 +7,7 @@ class FeedTest < FeedTestCase
       conn = Faraday::TestConnection.new do |stub|
         stub.get('technoweenie.atom') { [200, {}, data] }
       end
-      @feed = Feed.new conn, "technoweenie.atom"
+      @feed = Feed.new conn.get("technoweenie.atom")
     end
 
     it "parses #atom_data" do
@@ -138,8 +138,8 @@ class FeedTest < FeedTestCase
         stub.get('technoweenie.atom') { [200, {}, data] }
       end
 
-      feed = Feed.new conn, "technoweenie.atom"
-      assert_equal data, feed.atom_response.body
+      feed = Feed.new conn.get("technoweenie.atom")
+      assert_equal data, feed.response.body
     end
   end
 end
