@@ -4,6 +4,8 @@ require 'rake'
 namespace :ghtw do
   namespace :db do
     task :create do
+      $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
+      require 'github_twitter_server'
       GithubTwitterServer::Cacher::Feed.create_tables!
     end
   end
