@@ -8,6 +8,6 @@ module GithubTwitterServer
   autoload :Cacher, "github_twitter_server/cacher"
 
   class Connection < Faraday::Connection
-    include Faraday::Adapter::NetHttp
+    include Faraday::Adapter::Typhoeus.loaded? ? Faraday::Adapter::Typhoeus : Faraday::Adapter::NetHttp
   end
 end
