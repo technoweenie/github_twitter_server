@@ -3,7 +3,7 @@ module GithubTwitterServer
   class Cacher
     attr_accessor :connection
 
-    DEFAULT_HOST = "http://github.com".freeze
+    DEFAULT_HOST = "https://github.com".freeze
 
     def initialize(host = nil)
       @connection = GithubTwitterServer::Connection.new(host || DEFAULT_HOST)
