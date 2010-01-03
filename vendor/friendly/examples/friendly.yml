@@ -1,0 +1,7 @@
+development:
+  :adapter:  "mysql"
+  :host:     "localhost"
+  :user:     "root"
+  :password: "swordfish"
+  :database: "friendly_development"
+
