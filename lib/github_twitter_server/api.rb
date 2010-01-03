@@ -4,6 +4,13 @@ require 'base64'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
 require 'github_twitter_server'
 
+before do
+  if Friendly.db.nil?
+    Friendly.configure :adapter  => "sqlite", :database => ":memory:"
+    GithubTwitterServer::Cacher::Feed.create_tables!
+  end
+end
+
 get '/' do
   'hello world'
 end
