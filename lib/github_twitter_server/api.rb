@@ -6,8 +6,7 @@ require 'github_twitter_server'
 
 before do
   if Friendly.db.nil?
-    Friendly.configure :adapter  => "sqlite", :database => ":memory:"
-    GithubTwitterServer::Cacher::Feed.create_tables!
+    Friendly.configure ENV['DATABASE_URL']
   end
 end
 

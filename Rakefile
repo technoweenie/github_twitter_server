@@ -5,6 +5,7 @@ namespace :ghtw do
   task :init do
     $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
     require 'github_twitter_server'
+    Friendly.configure ENV['DATABASE_URL']
   end
 
   namespace :db do
