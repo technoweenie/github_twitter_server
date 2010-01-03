@@ -18,7 +18,7 @@ module GithubTwitterServer
       def self.read(path)
         path = path.gsub /\?.*/, ''
         feed = first(:path => path)
-        if feed && Time.now - feed.created_at < @cache_threshold
+        if feed && (Time.now - feed.created_at) < @cache_threshold
           feed.atom
         else
           atom = yield path
