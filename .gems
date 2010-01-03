@@ -1,4 +1,8 @@
 nokogiri
 sax-machine
-faraday --version 0.1.0
+faraday        --version 0.1.0
 twitter_server --version 0.2.1
+sequel         --version '>= 3.7.0'
+json_pure
+activesupport
+will_paginate
