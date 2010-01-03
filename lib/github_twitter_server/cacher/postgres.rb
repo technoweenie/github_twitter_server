@@ -1,5 +1,9 @@
 # hacks to get Friendly to work with PSQL
 module Friendly
+  class UUID
+    alias to_s to_guid
+  end
+
   class TableCreator
     protected
       def create_document_table(table)
