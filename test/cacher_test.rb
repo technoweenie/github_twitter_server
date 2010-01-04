@@ -55,7 +55,7 @@ class CacherTest < FeedTestCase
           @items[2][:text]
         assert_equal "@technoweenie/faraday 2 commits: a18f5754 add faraday gemspec\n@bob a18f5754 add faraday gemspec", 
           @items[3][:text]
-        assert_equal '@mxcl/homebrew #240 Updated Fourma: sip', 
+        assert_equal '@mxcl/homebrew opened #240 Updated Fourma: sip', 
           @items[4][:text]
         assert_equal '&quot;Git Guidelines&quot; is at mxcl/homebrew/wikis/git-guidelines', 
           @items[5][:text]

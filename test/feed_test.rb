@@ -38,7 +38,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses feed/entry/content for IssuesEvent" do
-      assert_equal '#240 Updated Fourma: sip', @feed.entries[4].content
+      assert_equal 'opened #240 Updated Fourma: sip', @feed.entries[4].content
     end
 
     it "parses feed/entry/content for WikiEvent" do
@@ -63,7 +63,7 @@ class FeedTest < FeedTestCase
     end
 
     it "combines status_text for IssuesEvent" do
-      assert_equal '@mxcl/homebrew #240 Updated Fourma: sip', @feed.entries[4].status_text
+      assert_equal '@mxcl/homebrew opened #240 Updated Fourma: sip', @feed.entries[4].status_text
     end
 
     it "combines status_text for WikiEvent" do
