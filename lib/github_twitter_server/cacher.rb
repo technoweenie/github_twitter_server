@@ -6,7 +6,7 @@ module GithubTwitterServer
     DEFAULT_HOST = "https://github.com".freeze
 
     def initialize(host = nil)
-      @connection = GithubTwitterServer::Connection.new(host || DEFAULT_HOST)
+      @connection = GithubTwitterServer.new_connection(host || DEFAULT_HOST)
     end
 
     def fetch_feed(path)
