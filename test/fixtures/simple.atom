@@ -2,6 +2,7 @@
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
   <entry>
     <id>tag:github.com,2008:CreateEvent/113908814</id>
+    <updated>2010-01-01T21:36:12-08:00</updated>
     <content type="html">foo</content>
     <author>
       <name>technoweenie</name>
