@@ -13,13 +13,32 @@ module GithubTwitterServer
     module IssuesEvent
       include GenericEvent
 
+      def issue_number
+        if title =~ /\w+ \w+ issue (\d+) on/
+          $1
+        end
+      end
+
       def project
-        @project ||= \
-          if title =~ /\w+ opened issue \d+ on (.*)$/
-            $1
-          else
-            nil
-          end
+        if title =~ /\w+ \w+ issue \d+ on (.*)$/
+          $1
+        end
+      end
+
+      def content
+        @content ||= "##{issue_number} #{parsed_content}"
+      end
+    end
+
+    module WatchEvent
+      include GenericEvent
+      def content
+        @content ||= begin
+          txt = title.dup
+          txt.gsub! /^\w+ started/, 'Started'
+          txt.gsub!(/watching (\w+\/)/) { |s| "watching @#{$1}" }
+          txt
+        end
       end
     end
 
@@ -27,8 +46,6 @@ module GithubTwitterServer
       def project
         if title =~ /\w+ commented on (.*)$/
           $1
-        else
-          nil
         end
       end
 
@@ -48,12 +65,9 @@ module GithubTwitterServer
 
     module PushEvent
       def project
-        @project ||= \
-          if title =~ /\w+ pushed to \w+ at (.*)$/
-            $1
-          else
-            nil
-          end
+        if title =~ /\w+ pushed to \w+ at (.*)$/
+          $1
+        end
       end
 
       # put each commit on a line

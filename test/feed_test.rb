@@ -17,7 +17,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses atom entries" do
-      assert_equal 7, @feed.entries.size
+      assert_equal 8, @feed.entries.size
     end
 
     it "parses feed/entry/link" do
@@ -38,7 +38,7 @@ class FeedTest < FeedTestCase
     end
 
     it "parses feed/entry/content for IssuesEvent" do
-      assert_equal 'Updated Fourma: sip', @feed.entries[4].content
+      assert_equal '#240 Updated Fourma: sip', @feed.entries[4].content
     end
 
     it "parses feed/entry/content for WikiEvent" do
@@ -63,7 +63,7 @@ class FeedTest < FeedTestCase
     end
 
     it "combines status_text for IssuesEvent" do
-      assert_equal '@mxcl/homebrew Updated Fourma: sip', @feed.entries[4].status_text
+      assert_equal '@mxcl/homebrew #240 Updated Fourma: sip', @feed.entries[4].status_text
     end
 
     it "combines status_text for WikiEvent" do
@@ -72,6 +72,10 @@ class FeedTest < FeedTestCase
 
     it "combines status_text for DeleteEvent" do
       assert_equal 'Deleted branch was at qrush/gemcutter/tree/add_gravatars', @feed.entries[6].status_text
+    end
+
+    it "combines status_text for WatchEvent" do
+      assert_equal 'Started watching @technoweenie/mephisto', @feed.entries[7].status_text
     end
 
     it "parses feed/entry/title" do
