@@ -21,7 +21,7 @@ class CacherTest < FeedTestCase
       end
     
       it "fetches all feed items" do
-        assert_equal 7, @items.size
+        assert_equal 8, @items.size
       end
     
       it "sets status ID" do
@@ -32,6 +32,7 @@ class CacherTest < FeedTestCase
         assert_equal '114814260', @items[4][:id]
         assert_equal '114807560', @items[5][:id]
         assert_equal '114806136', @items[6][:id]
+        assert_equal '119438417', @items[7][:id]
       end
     
       it "sets screen name" do
@@ -42,6 +43,7 @@ class CacherTest < FeedTestCase
         assert_equal 'traviscline',  @items[4][:user][:screen_name]
         assert_equal 'mxcl',         @items[5][:user][:screen_name]
         assert_equal 'qrush',        @items[6][:user][:screen_name]
+        assert_equal 'akitaonrails', @items[7][:user][:screen_name]
       end
     
       it "sets text" do
@@ -59,6 +61,8 @@ class CacherTest < FeedTestCase
           @items[5][:text]
         assert_equal 'Deleted branch was at qrush/gemcutter/tree/add_gravatars', 
           @items[6][:text]
+        assert_equal 'Started watching @technoweenie/mephisto', 
+          @items[7][:text]
       end
     end
   end

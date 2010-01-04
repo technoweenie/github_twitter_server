@@ -30,6 +30,18 @@ module GithubTwitterServer
       end
     end
 
+    module WatchEvent
+      include GenericEvent
+      def content
+        @content ||= begin
+          txt = title.dup
+          txt.gsub! /^\w+ started/, 'Started'
+          txt.gsub!(/watching (\w+\/)/) { |s| "watching @#{$1}" }
+          txt
+        end
+      end
+    end
+
     module CommitCommentEvent
       def project
         if title =~ /\w+ commented on (.*)$/

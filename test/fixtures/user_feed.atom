@@ -150,4 +150,24 @@
       <name>qrush</name>
     </author>
   </entry>
+  <entry>
+    <id>tag:github.com,2008:WatchEvent/119438417</id>
+    <published>2010-01-03T17:26:17-08:00</published>
+    <updated>2010-01-03T17:26:17-08:00</updated>
+    <link type="text/html" href="http://github.com/technoweenie/mephisto" rel="alternate"/>
+    <title>akitaonrails started watching technoweenie/mephisto</title>
+    <content type="html">
+&lt;div class=&quot;details&quot;&gt;
+  &lt;div class=&quot;message&quot;&gt;
+      mephisto's description:
+      &lt;blockquote&gt;
+        A mirror of the mephisto code-base
+      &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+    <author>
+      <name>akitaonrails</name>
+    </author>
+  </entry>
 </feed>
