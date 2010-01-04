@@ -8,8 +8,10 @@ class CacherTest < FeedTestCase
     describe "parsing #{method_title} Feed" do
       before :all do
         data = feed_data(:user_feed)
-        conn = Faraday::TestConnection.new do |stub|
-          stub.get(url) { [200, {}, data] }
+        conn = Alice::Connection.new do
+          adapter :test do |stub|
+            stub.get(url) { [200, {}, data] }
+          end
         end
         @cacher = Cacher.new
         @cacher.connection = conn
