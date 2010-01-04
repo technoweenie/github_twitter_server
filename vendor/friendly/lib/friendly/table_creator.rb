@@ -1,15 +1,28 @@
-# hacks to get Friendly to work with PSQL
 module Friendly
-  class UUID
-    alias to_s to_guid
-  end
-
   class TableCreator
+    attr_reader :db, :attr_klass
+
+    def initialize(db = Friendly.db, attr_klass = Friendly::Attribute)
+      @db         = db
+      @attr_klass = attr_klass
+    end
+
+    def create(table)
+      unless db.table_exists?(table.table_name)
+        case table
+        when DocumentTable
+          create_document_table(table) 
+        when Index
+          create_index_table(table)
+        end
+      end
+    end
+
     protected
       def create_document_table(table)
         db.create_table(table.table_name) do
           primary_key :added_id
-          String      :id,         :size => 36
+          column      :id, :bytea
           String      :attributes, :text => true
           Time        :created_at
           Time        :updated_at
@@ -20,8 +33,8 @@ module Friendly
         attr = attr_klass # close around this please
 
         db.create_table(table.table_name) do
-          String :id, :size => 36
-          table.fields.flatten.each do |f|
+          column      :id, :bytea
+          table.fields.flatten.each do |f|    
             klass = table.klass.attributes[f].type
             type  = attr.custom_type?(klass) ? attr.sql_type(klass) : klass
             column(f, type)

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="styles/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="styles/print.css" type="text/css" media="print" />
+    <!--[if lt IE 8]><link rel="stylesheet" href="/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <script type="text/javascript" src="scripts/shCore.js"></script>
+  	<script type="text/javascript" src="scripts/shBrushRuby.js"></script>
+  	<script type="text/javascript" src="scripts/shBrushBash.js"></script>
+  	<link type="text/css" rel="stylesheet" href="styles/shCore.css"/>
+  	<link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css"/>
+  	<script type="text/javascript">
+  		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+  		SyntaxHighlighter.all();
+  	</script>
+
+    <link rel="stylesheet" href="styles/friendly.css" type="text/css" media="screen, projection" />
+    <title>NoSQL with MySQL in Ruby - Friendly</title> 
+  </head>
+  <body>
+    <div id="information">
+      <div class="container">
+        <h1>Friendly &nbsp;<span>NoSQL with MySQL in Ruby</span></h1>
+
+        <div id="about" class="clearfix">
+          <div class="span-17 append-1">
+        	  <dl>
+        	    <dt>Store schema-less data in MySQL.</dt>
+        	    <dd>Evolve your data model without feeling the pain of migrations.</dd>
+  
+        	    <dt>Build indexes offline</dt>
+        	    <dd>Building an index can take hours with a lot of data. Stay agile without taking your app offline.</dd>
+  
+        	    <dt>Write-through and read-through caching baked right in.</dt>
+        	    <dd><a href="http://radar.oreilly.com/2009/10/watching-websites.html">Fast websites make more money.</a> The 99.8% cache hit rate we see in production is a one-liner with Friendly.</dd>
+        	  </dl>
+		  <p id="created-by">Created by: <a href="http://jamesgolick.com">James Golick</a> and <a href="http://technotales.wordpress.com/">Jonathan Palardy</a> for <a href="http://fetlife.com">FetLife</a> #NSFW. </p>
+		  <p class="small">Inspired by <a href="http://bret.appspot.com/entry/how-friendfeed-uses-mysql">How FriendFeed uses MySQL to store schema-less data</a>.</p>
+          </div>
+          <div class="span-6 last">
+            <div class="box">
+          	  <ul class="box">
+          	    <li><span class="label small quiet">repo:</span> <a href="http://github.com/jamesgolick/friendly">Github</a></li>
+          	    <li><span class="label small quiet">docs:</span> <a href="http://yardoc.org/docs/jamesgolick-friendly">Yardoc.org</a></li>
+          	    <li><span class="label small quiet">blog:</span> <a href="http://jamesgolick.com/2009/12/16/introducing-friendly-nosql-with-mysql-in-ruby.html">Announcement</a></li>
+          	    <li><span class="label small quiet">list:</span> <a href="mailto: friendly@librelist.com">Librelist</a></li>
+                <li><span class="label small quiet">irc:</span> #friendlyorm <span class="small quiet">(freenode)</li>
+          	  </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="quickinstall">
+      <div class="container">
+
+        <h2 class="bottom">Get Friendly in 5 minutes</h2>
+        <h3 class="bottom">Install friendly</h3>
+        <p class="quiet bottom">Install the gem.</p>
+	      <pre class="brush: bash;">sudo gem install friendly</pre>
+        <br/>
+          
+        <h3 class="bottom">Setup gem dependency in Rails</h3>
+        <p class="bottom quiet">If you're on rails, add this in environment.rb:</p>
+        <pre class="brush: ruby;">config.gem "friendly"</pre>
+        
+        <p class="quiet bottom">and create a config/friendly.yml:</p>
+        <pre class="brush: ruby;">
+  	development:
+  	  :adapter:  "mysql"
+  	  :host:     "localhost"
+  	  :user:     "root"
+  	  :password: "swordfish"
+  	  :database: "friendly_development"
+        </pre>
+	      
+        <p class="quiet">not using Rails:</p>
+        <pre class="brush: ruby;">
+  	Friendly.configure :adapter  => "mysql",
+  				       :host     => "localhost",
+  				       :user     => "root",
+  				       :password => "swordfish",
+  				       :database => "playing_with_friendly"
+        </pre>
+
+        <br/>
+        <h3 class="bottom">Create a Model</h3>
+        <p class="bottom quiet">Fire up your vim:</p>
+        <pre class="brush: ruby;">
+  	class BlogPost
+  	  include Friendly::Document
+	  
+  	  attribute :author, String
+  	  attribute :title,  String
+  	  attribute :body,   String
+  	end
+        </pre>
+        <br/>
+
+        <h3 class="bottom">Create the Table</h3>
+        <p class="quiet bottom">From irb or script/console:</p>
+        <pre class="brush: ruby;">Friendly.create_tables!</pre>
+        <br/>
+    
+        <h3 class="bottom">Index</h3>
+        <p class="bottom quiet">Just add the indexes you want to your model.</p>
+        <pre class="brush: ruby; highlight: [8,9];">
+  	class BlogPost
+  	  include Friendly::Document
+	  
+  	  attribute :author, String
+  	  attribute :title,  String
+  	  attribute :body,   String
+	  
+  	  indexes :author
+  	  indexes :created_at
+  	end      
+        </pre>
+
+        <p class="bottom quiet">Run create_tables again and the index tables will be created for you.</p>
+        <pre class="brush: ruby;">Friendly.create_tables!</pre>
+        <br/>
+
+        <h3 class="bottom">Create Objects</h3>
+        <p class="bottom quiet">With familiar ActiveRecord syntax:</p>
+        <pre class="brush: ruby;">
+  	BlogPost.create :author => "James Golick",
+  				    :title  => "Friendly has familiar syntax.",
+  				    :body   => "So, there's very little learning curve."
+       </pre>
+       <br/>
+
+
+        <h3 class="bottom">Query</h3>
+        <p class="bottom quiet">All posts by James Golick:</p>
+        <pre class="brush: ruby;">BlogPost.all(:author => "James Golick")</pre>
+
+        <p class="bottom quiet">Most recent posts:</p>
+        <pre class="brush: ruby;">BlogPost.all(:order! => :created_at.desc)</pre>
+        <br/>
+
+        <h3 class="bottom">Cache</h3>
+        <p class="bottom quiet">Install the memcached gem:</p>
+        <pre class="brush: ruby;">sudo gem install memcached</pre>
+
+        <p class="bottom quiet">Configure Friendly to cache:</p>
+        <pre class="brush: ruby;">Friendly.cache = Friendly::Memcached.new(Memcached.new)</pre>
+
+        <p class="bottom quiet">Configure your model to cache:</p>
+        <pre class="brush: ruby; highlight: [11];">
+  	class BlogPost
+  	  include Friendly::Document
+	  
+  	  attribute :author, String
+  	  attribute :title,  String
+  	  attribute :body,   String
+	  
+  	  indexes :author
+  	  indexes :created_at
+	  
+  	  caches_by :id
+  	end
+        </pre>
+        <p class="friendlier">And now your app is that much <u>friendlier</u>!</p>
+      </div>
+    </div>
+    <div id="footer" class="small">
+      <div class="container">
+        <div class="span-6">
+          <h4>Important links</h4>
+          <ul>
+            <li><a href="http://github.com/jamesgolick/friendly">GitHub Repository</a></li>
+            <li><a href="http://github.com/jamesgolick/friendly#readme">README</a></li>
+            <li><a href="mailto: friendly@librelist.com">Mailing List</a></li>
+            <li><a href="http://yardoc.org/docs/jamesgolick-friendly">Documentation</a></li>
+            <li><a href="http://jamesgolick.com/2009/12/16/introducing-friendly-nosql-with-mysql-in-ruby.html">Release Announcement</a></li>
+          </ul>
+        </div>
+        <div class="span-6">
+          <h4>Created by</h4>
+          <ul>
+            <li><a href="http://jamesgolick.com">James Golick</a></li>
+            <li><a href="http://technotales.wordpress.com">Jonathan Palardy</a></li>
+          </ul>
+        </div>
+        <div class="span-6">
+          <h4>Inspired by</h4>
+          <ul>
+            <li><a href="http://bret.appspot.com/entry/how-friendfeed-uses-mysql">FriendFeed</a></li>
+            <!-- Special thanks to Jesus Christ our Lord Saviour -->
+          </ul>
+        </div>
+        <div class="span-6 last">
+          <h4>Used on</h4>
+          <ul>
+            <li><a href="http://fetlife.com">FetLife</a> <span class="small">#NSFW</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">clicky.init(164296);</script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="http://static.getclicky.com/164296ns.gif" /></p></noscript>
+  </body>
+</html>

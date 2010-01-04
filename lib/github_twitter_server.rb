@@ -1,6 +1,7 @@
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'vendor', 'friendly', 'lib')
+
 require 'alice'
 require 'friendly'
-require "github_twitter_server/cacher/postgres"
 
 module GithubTwitterServer
   autoload :Feed,   "github_twitter_server/feed"
