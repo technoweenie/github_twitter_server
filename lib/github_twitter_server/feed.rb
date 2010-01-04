@@ -30,7 +30,7 @@ module GithubTwitterServer
       element :link, :value => :href, :with => {:type => "text/html", :rel => 'alternate'}
 
       def twitter_status
-        STATUS.merge(:id => status_id, :text => status_text, :user => twitter_user, :created_at => Time.parse(updated).inspect)
+        STATUS.merge(:id => status_id, :text => status_text, :user => twitter_user, :created_at => updated_at)
       end
 
       def twitter_user
