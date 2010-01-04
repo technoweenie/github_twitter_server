@@ -14,19 +14,27 @@ module GithubTwitterServer
       include GenericEvent
 
       def issue_number
-        if title =~ /\w+ \w+ issue (\d+) on/
-          $1
-        end
+        @issue_number
+      end
+
+      def issue_action
+        @issue_action
       end
 
       def project
-        if title =~ /\w+ \w+ issue \d+ on (.*)$/
-          $1
-        end
+        @project ||= \
+          if title =~ /\w+ (\w+) issue (\d+) on (.*)$/
+            @issue_action = $1
+            @issue_number = $2
+            $3
+          end
       end
 
       def content
-        @content ||= "##{issue_number} #{parsed_content}"
+        @content ||= begin
+          project
+          "#{issue_action} ##{issue_number} #{parsed_content}"
+        end
       end
     end
 
@@ -44,9 +52,10 @@ module GithubTwitterServer
 
     module CommitCommentEvent
       def project
-        if title =~ /\w+ commented on (.*)$/
-          $1
-        end
+        @project ||= \
+          if title =~ /\w+ commented on (.*)$/
+            $1
+          end
       end
 
       # Comment in a18f575: this mess is gonna get raw, like sushi =>
@@ -65,9 +74,10 @@ module GithubTwitterServer
 
     module PushEvent
       def project
-        if title =~ /\w+ pushed to \w+ at (.*)$/
-          $1
-        end
+        @project ||= \
+          if title =~ /\w+ pushed to \w+ at (.*)$/
+            $1
+          end
       end
 
       # put each commit on a line
