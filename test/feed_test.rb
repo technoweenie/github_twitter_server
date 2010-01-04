@@ -4,8 +4,10 @@ class FeedTest < FeedTestCase
   describe "parsing User Feed" do
     before :all do
       data = feed_data(:user_feed)
-      conn = Faraday::TestConnection.new do |stub|
-        stub.get('technoweenie.atom') { [200, {}, data] }
+      conn = Alice::Connection.new do
+        adapter :test do |stub|
+          stub.get('technoweenie.atom') { [200, {}, data] }
+        end
       end
       @feed = Feed.new conn.get("technoweenie.atom").body
     end
@@ -134,8 +136,10 @@ class FeedTest < FeedTestCase
   describe "#atom_response" do
     it "fetches atom data from user url" do
       data = feed_data(:user_feed)
-      conn = Faraday::TestConnection.new do |stub|
-        stub.get('technoweenie.atom') { [200, {}, data] }
+      conn = Alice::Connection.new do
+        adapter :test do |stub|
+          stub.get('technoweenie.atom') { [200, {}, data] }
+        end
       end
 
       feed = Feed.new conn.get("technoweenie.atom").body

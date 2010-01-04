@@ -12,9 +12,12 @@ class CacherFeedTest < FeedTestCase
     end
 
     before do
-      @conn = Faraday::TestConnection.new do |stub|
-        stub.get('zenhob.atom') { [200, {}, @data] }
-        stub.get('towski.atom') { [200, {}, @data] }
+      data  = @data
+      @conn = Alice::Connection.new do
+        adapter :test do |stub|
+          stub.get('zenhob.atom') { [200, {}, data] }
+          stub.get('towski.atom') { [200, {}, data] }
+        end
       end
       @cacher = Cacher.new
       @cacher.connection = @conn
@@ -47,9 +50,12 @@ class CacherFeedTest < FeedTestCase
     end
 
     before do
-      @conn = Faraday::TestConnection.new do |stub|
-        stub.get('zenhob.private.atom') { [200, {}, @data] }
-        stub.get('towski.private.atom') { [200, {}, @data] }
+      data  = @data
+      @conn = Alice::Connection.new do
+        adapter :test do |stub|
+          stub.get('zenhob.private.atom') { [200, {}, data] }
+          stub.get('towski.private.atom') { [200, {}, data] }
+        end
       end
       @cacher = Cacher.new
       @cacher.connection = @conn

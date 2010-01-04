@@ -23,7 +23,7 @@ begin
     gem.email = "technoweenie@gmail.com"
     gem.homepage = "http://github.com/technoweenie/github-twitter-server"
     gem.authors = ["rick"]
-    gem.add_dependency "faraday", "~> 0.1.0"
+    gem.add_dependency "alice", "~> 0.1.0"
     gem.add_dependency "sax-machine", ">= 0"
     gem.add_dependency "twitter_server", ">= 0"
     gem.add_dependency "friendly", ">= 0"
