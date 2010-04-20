@@ -21,7 +21,7 @@ module GithubTwitterServer
         if feed && (Time.now - feed.created_at) < @cache_threshold
           feed.atom
         else
-          atom = yield path
+          atom = yield path if block_given?
           if feed
             feed.atom       = atom
             feed.created_at = Time.now.utc
