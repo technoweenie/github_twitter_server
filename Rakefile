@@ -24,11 +24,10 @@ begin
     gem.email = "technoweenie@gmail.com"
     gem.homepage = "http://github.com/technoweenie/github-twitter-server"
     gem.authors = ["rick"]
-    gem.add_dependency "alice", "~> 0.1.0"
+    gem.add_dependency "faraday", "~> 0.2.4"
     gem.add_dependency "sax-machine", ">= 0"
     gem.add_dependency "twitter_server", ">= 0"
     gem.add_dependency "friendly", ">= 0"
-    gem.add_development_dependency "context", ">= 0"
     gem.add_development_dependency "nokogiri", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

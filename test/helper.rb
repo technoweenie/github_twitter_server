@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'context'
+require 'test/unit'
 
 if ENV['LEFTRIGHT']
   require 'leftright'
@@ -18,8 +18,19 @@ Friendly.configure :adapter  => "sqlite", :database => ":memory:"
 GithubTwitterServer::Cacher::Feed.create_tables!
 
 class FeedTestCase < Test::Unit::TestCase
-  before :all do
-    Friendly.db[:github_feeds].delete
+  class << self
+    attr_accessor :run_setup
+  end
+
+  def setup
+    if !self.class.run_setup
+      Friendly.db[:github_feeds].delete
+      Friendly.db[:index_github_feeds_on_path].delete
+    end
+    self.class.run_setup = true
+  end
+
+  def default_test
   end
 
   module XmlAssertions
