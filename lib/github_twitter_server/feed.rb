@@ -28,13 +28,14 @@ module GithubTwitterServer
       element :author,  :as => :author_name
       element :content, :as => :raw_content
       element :link, :value => :href, :with => {:type => "text/html", :rel => 'alternate'}
+      element 'media:thumbnail', :as => :avatar, :value => :url
 
       def twitter_status
         STATUS.merge(:id => status_id, :text => status_text, :user => twitter_user, :created_at => updated_at)
       end
 
       def twitter_user
-        {:screen_name => author}
+        {:screen_name => author, :profile_image_url => avatar}
       end
 
       def content
