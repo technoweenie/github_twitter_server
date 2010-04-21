@@ -132,6 +132,10 @@ class FeedTest < FeedTestCase
     assert_equal 'technoweenie', @feed.entries[0].author
   end
 
+  def test_parses_feed_entry_avatar
+    assert_equal 'http://www.gravatar.com/avatar/abc', @feed.entries[0].avatar
+  end
+
   def test_converts_updated_at_to_time
     assert_equal Time.utc(2009, 12, 19, 16, 40, 48), @feed.entries[0].updated_at
   end
