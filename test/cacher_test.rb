@@ -45,6 +45,10 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'helper'))
       assert_equal 'akitaonrails', @items[7][:user][:screen_name]
     end
 
+    def test_sets_avatar
+      assert_equal 'http://www.gravatar.com/avatar/abc', @items[0][:user][:profile_image_url]
+    end
+
     def test_sets_text
       assert_equal '@technoweenie/faraday @c_a18f575 this mess is gonna get raw, like sushi', 
         @items[0][:text]

@@ -35,7 +35,7 @@ module GithubTwitterServer
       end
 
       def twitter_user
-        {:screen_name => author}
+        {:screen_name => author, :profile_image_url => avatar}
       end
 
       def content
